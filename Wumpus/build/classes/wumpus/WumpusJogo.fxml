@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Pane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: gold;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="&quot;Mundo do Wumpus&quot;">
+               <font>
+                  <Font name="Arial Bold" size="25.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="52.0" prefWidth="630.0" style="-fx-border-color: lemonchiffon; -fx-border-width: 2; -fx-border-radius: 5; -fx-border-style: centered;">
+                     <children>
+                        <Label layoutX="10.0" layoutY="-8.0" style="-fx-background-color: black;" text=" Jogo " textFill="#fffefe">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="50.0" prefWidth="540.0">
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                           <children>
+                              <Label text="Altura:" textFill="#fbff00">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField alignment="CENTER_RIGHT" prefWidth="30.0" text="0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label layoutX="20.0" layoutY="25.0" text="Largura:" textFill="#fbff00">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField alignment="CENTER_RIGHT" layoutX="66.0" layoutY="25.0" prefWidth="30.0" text="0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label layoutX="106.0" layoutY="25.0" text="Nº Buracos:" textFill="#fbff00">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField alignment="CENTER_RIGHT" layoutX="161.0" layoutY="25.0" prefWidth="30.0" text="0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label layoutX="201.0" layoutY="25.0" text="Nº Wumpus:" textFill="#fbff00">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField alignment="CENTER_RIGHT" layoutX="278.0" layoutY="25.0" prefWidth="30.0" text="0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button fx:id="btSair" mnemonicParsing="false" onAction="#btSairAction" style="-fx-font: 14 arial; -fx-background-color: #f0f0f0; -fx-cursor: hand;" text="Inicializar">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="10.0" prefHeight="52.0" prefWidth="360.0" style="-fx-border-color: lemonchiffon; -fx-border-width: 2; -fx-border-radius: 5; -fx-border-style: centered;">
+                     <children>
+                        <Label layoutX="10.0" layoutY="-8.0" style="-fx-background-color: black;" text=" Ações " textFill="#fffefe">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="50.0" prefWidth="360.0">
+                           <children>
+                              <ImageView fx:id="btGravar111" fitHeight="24.0" fitWidth="24.0" focusTraversable="true" onMouseClicked="#btGravarAction" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                                 <image>
+                                    <Image url="@../../../../../../../UINFOR/Catalogo%20P&amp;S/CatalogoPeS/src/catalogopes/resources/images/buttons/ok.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="btGravar1111" fitHeight="24.0" fitWidth="24.0" focusTraversable="true" layoutX="20.0" layoutY="25.0" onMouseClicked="#btGravarAction" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                                 <image>
+                                    <Image url="@../../../../../../../UINFOR/Catalogo%20P&amp;S/CatalogoPeS/src/catalogopes/resources/images/buttons/ok.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="btGravar11111" fitHeight="24.0" fitWidth="24.0" focusTraversable="true" layoutX="54.0" layoutY="25.0" onMouseClicked="#btGravarAction" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                                 <image>
+                                    <Image url="@../../../../../../../UINFOR/Catalogo%20P&amp;S/CatalogoPeS/src/catalogopes/resources/images/buttons/ok.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="btGravar111111" fitHeight="24.0" fitWidth="24.0" focusTraversable="true" layoutX="88.0" layoutY="25.0" onMouseClicked="#btGravarAction" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                                 <image>
+                                    <Image url="@../../../../../../../UINFOR/Catalogo%20P&amp;S/CatalogoPeS/src/catalogopes/resources/images/buttons/ok.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="btGravar1111111" fitHeight="24.0" fitWidth="24.0" focusTraversable="true" layoutX="122.0" layoutY="25.0" onMouseClicked="#btGravarAction" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                                 <image>
+                                    <Image url="@../../../../../../../UINFOR/Catalogo%20P&amp;S/CatalogoPeS/src/catalogopes/resources/images/buttons/ok.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="btGravar11111111" fitHeight="24.0" fitWidth="24.0" focusTraversable="true" layoutX="156.0" layoutY="25.0" onMouseClicked="#btGravarAction" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                                 <image>
+                                    <Image url="@resources/exit.gif" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="btGravar111111111" fitHeight="24.0" fitWidth="24.0" focusTraversable="true" layoutX="190.0" layoutY="25.0" onMouseClicked="#btGravarAction" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                                 <image>
+                                    <Image url="@../../../../../../../UINFOR/Catalogo%20P&amp;S/CatalogoPeS/src/catalogopes/resources/images/buttons/ok.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" top="15.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" right="5.0" />
+                     </HBox.margin>
+                  </Pane>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
