@@ -35,6 +35,16 @@ public class Casa {
         this.visitada = false;
     }
 
+  public void setPosicaoX(int posicaoX) {
+    this.posicaoX = posicaoX;
+  }
+
+  public void setPosicaoY(int posicaoY) {
+    this.posicaoY = posicaoY;
+  }
+    
+    
+    
     public int getPosicaoX(){
         return posicaoX;
     }
@@ -108,6 +118,11 @@ public class Casa {
         this.grito = sensacoes[4];
     }
     
+    public void getSensacoes(){
+      String p = "CASA SENSAÇÕES \n [" + fedor + ", " + brisa + ", " + brilho + ", " + choque +
+                ", " + grito + "]";
+      System.out.println(p);
+    }
     public void setVisitada(){
         this.visitada = true;
     }

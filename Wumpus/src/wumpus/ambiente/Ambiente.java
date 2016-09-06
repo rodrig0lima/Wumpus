@@ -1,4 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wumpus.ambiente;
+
 /**
  *
  * @author Fabio
@@ -203,10 +209,10 @@ public class Ambiente {
             this.hGrito = false;
         }
         boolean[] percepcao = {fedor, brisa, brilho, choque, grito};
-        System.out.println("Percepção: [fedor, brisa, brilho, choque, grito]");
-        String p = "[" + fedor + ", " + brisa + ", " + brilho + ", " + choque +
-                ", " + grito + "]";
-        System.out.println(p);
+//        System.out.println("Percepção: [fedor, brisa, brilho, choque, grito]");
+//        String p = "[" + fedor + ", " + brisa + ", " + brilho + ", " + choque +
+//                ", " + grito + "]";
+//        System.out.println(p);
         return percepcao;
     }
     

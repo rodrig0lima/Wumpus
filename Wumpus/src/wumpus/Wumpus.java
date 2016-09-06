@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import wumpus.agente.Agente;
 import wumpus.ambiente.Ambiente;
 
 /**
@@ -28,17 +29,35 @@ public class Wumpus extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                Ambiente amb = new Ambiente(0,0,0,0);
-                amb.getPercepcao();
-                amb.avancar();
-                amb.getPercepcao();
-                amb.girar(0);
-                amb.avancar();
-                amb.getPercepcao();
-                amb.girar(1);
-                amb.girar(1);
-                amb.avancar();
-                amb.getPercepcao();
+                Ambiente ambiente = new Ambiente(4,4,3,1);
+                Agente agente = new Agente(ambiente);
+                boolean[] percepções = ambiente.getPercepcao();
+        String p = "[" + percepções[0] + ", " + percepções[1] + ", " + percepções[2] + ", " + percepções[3] +
+                ", " + percepções[4] + "]";
+                System.out.println(p);
+        percepções = ambiente.getPercepcao();
+        p = "[" + percepções[0] + ", " + percepções[1] + ", " + percepções[2] + ", " + percepções[3] +
+                ", " + percepções[4] + "]";
+                System.out.println(p);
+        percepções = ambiente.getPercepcao();
+        p = "[" + percepções[0] + ", " + percepções[1] + ", " + percepções[2] + ", " + percepções[3] +
+                ", " + percepções[4] + "]";
+                System.out.println(p);
+        percepções = ambiente.getPercepcao();
+        p = "[" + percepções[0] + ", " + percepções[1] + ", " + percepções[2] + ", " + percepções[3] +
+                ", " + percepções[4] + "]";
+                System.out.println(p);
+//                agente.andar();
+//                amb.getPercepcao();
+//                amb.avancar();
+//                amb.getPercepcao();
+//                amb.girar(0);
+//                amb.avancar();
+//                amb.getPercepcao();
+//                amb.girar(1);
+//                amb.girar(1);
+//                amb.avancar();
+//                amb.getPercepcao();
             }
         });
         
