@@ -46,64 +46,64 @@ public class Agente {
             voltar();
         }
     }
-    public void voltar(){
-      for (Acao acao : acoes) {
-        System.out.println(acao.getSentido()+" "+acao.getAndou());
-      }
-      System.out.println("VOLTEI!!");
-      switch (acoes.get(nAcoes-1).getSentido()) {
-        case 0:
-          System.out.println("Voltando: Girei");
-          ambiente.girar(1);
-          acoes.remove(nAcoes-1);
-          nAcoes--;
-          break;
-        case 1:
-          System.out.println("Voltando: Girei");
-          ambiente.girar(0);
-          acoes.remove(nAcoes-1);
-          nAcoes--;
-          break; 
-        case 3:
-          ambiente.girar(SENTIDO_ESQUERDA);
-          ambiente.girar(SENTIDO_ESQUERDA);
-          direcaoAtual = 3 - direcaoAtual;
-          for (Acao acao : acoes) {
-            if(acao.getSentido() == 3)
-              acao.setSentido(2);
-          }
-          break;
-        default:
-          break;
-      }
-      
-      if (acoes.get(nAcoes-1).getAndou()) {
-         ambiente.avancar();
-         acoes.remove(nAcoes-1);
-         nAcoes--;
-         ambiente.girar(SENTIDO_ESQUERDA);
-         ambiente.girar(SENTIDO_ESQUERDA);
-         switch(direcaoAtual){
-           case DIRECAO_CIMA:
-             posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoX()+1);
-             System.out.println("Eu estou aq: "+ posicaoAtual.getPosicaoX()+","+posicaoAtual.getPosicaoY());
-             break;
-           case DIRECAO_BAIXO:
-             posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoX()-1);
-             System.out.println("Eu estou aq: "+ posicaoAtual.getPosicaoX()+","+posicaoAtual.getPosicaoY());
-             break;
-           case DIRECAO_ESQUERDA:
-             posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoY()-1);
-             System.out.println("Eu estou aq: "+ posicaoAtual.getPosicaoX()+","+posicaoAtual.getPosicaoY());
-             break;
-           case DIRECAO_DIREITA:
-             posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoY()+1);
-             System.out.println("Eu estou aq: "+ posicaoAtual.getPosicaoX()+","+posicaoAtual.getPosicaoY());
-             break;
-         }
-      }else{
-        voltar();
-      }
+
+    public void voltar() {
+        for (Acao acao : acoes) {
+            System.out.println(acao.getSentido() + " " + acao.getAndou());
+        }
+        System.out.println("VOLTEI!!");
+        switch (acoes.get(nAcoes - 1).getSentido()) {
+            case 0:
+                System.out.println("Voltando: Girei");
+                ambiente.girar(1);
+                acoes.remove(nAcoes - 1);
+                nAcoes--;
+                break;
+            case 1:
+                System.out.println("Voltando: Girei");
+                ambiente.girar(0);
+                acoes.remove(nAcoes - 1);
+                nAcoes--;
+                break;
+            case 3:
+                ambiente.girar(SENTIDO_ESQUERDA);
+                ambiente.girar(SENTIDO_ESQUERDA);
+                direcaoAtual = 3 - direcaoAtual;
+                for (Acao acao : acoes) {
+                    if (acao.getSentido() == 3) {
+                        acao.setSentido(2);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        if (acoes.get(nAcoes - 1).getAndou()) {
+            ambiente.avancar();
+            acoes.remove(nAcoes - 1);
+            nAcoes--;
+            switch (direcaoAtual) {
+                case DIRECAO_CIMA:
+                    posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoX() + 1);
+                    System.out.println("Eu estou aq: " + posicaoAtual.getPosicaoX() + "," + posicaoAtual.getPosicaoY());
+                    break;
+                case DIRECAO_BAIXO:
+                    posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoX() - 1);
+                    System.out.println("Eu estou aq: " + posicaoAtual.getPosicaoX() + "," + posicaoAtual.getPosicaoY());
+                    break;
+                case DIRECAO_ESQUERDA:
+                    posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoY() - 1);
+                    System.out.println("Eu estou aq: " + posicaoAtual.getPosicaoX() + "," + posicaoAtual.getPosicaoY());
+                    break;
+                case DIRECAO_DIREITA:
+                    posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoY() + 1);
+                    System.out.println("Eu estou aq: " + posicaoAtual.getPosicaoX() + "," + posicaoAtual.getPosicaoY());
+                    break;
+            }
+        } else {
+            voltar();
+        }
     }
 
     public boolean matarWumpus() {
