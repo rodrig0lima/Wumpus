@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wumpus.agente;
 import java.util.ArrayList;
 import wumpus.ambiente.Ambiente;
@@ -15,8 +10,8 @@ public class Agente {
     // Constantes do agente
     private final int DIRECAO_CIMA = 0;
     private final int DIRECAO_DIREITA = 1;
-    private final int DIRECAO_BAIXO = 2;
-    private final int DIRECAO_ESQUERDA = 3;
+    private final int DIRECAO_ESQUERDA = 2;
+    private final int DIRECAO_BAIXO = 3;
     private final int SENTIDO_ESQUERDA = 0;
     private final int SENTIDO_DIREITA = 1;
     // Atributos do agente
@@ -50,17 +45,34 @@ public class Agente {
         }
     }
     public void voltar(){
+      for (Acao acao : acoes) {
+        System.out.println(acao.getSentido()+" "+acao.getAndou());
+      }
       System.out.println("VOLTEI!!");
-      if(acoes.get(nAcoes-1).getSentido()==0){
-        System.out.println("Voltando: Girei");
-        ambiente.girar(1);
-        acoes.remove(nAcoes-1);
-        nAcoes--;
-      }else if(acoes.get(nAcoes-1).getSentido()==1){
-        System.out.println("Voltando: Girei");
-        ambiente.girar(0);      
-        acoes.remove(nAcoes-1);
-        nAcoes--;
+      switch (acoes.get(nAcoes-1).getSentido()) {
+        case 0:
+          System.out.println("Voltando: Girei");
+          ambiente.girar(1);
+          acoes.remove(nAcoes-1);
+          nAcoes--;
+          break;
+        case 1:
+          System.out.println("Voltando: Girei");
+          ambiente.girar(0);
+          acoes.remove(nAcoes-1);
+          nAcoes--;
+          break; 
+        case 3:
+          ambiente.girar(SENTIDO_ESQUERDA);
+          ambiente.girar(SENTIDO_ESQUERDA);
+          direcaoAtual = 3 - direcaoAtual;
+          for (Acao acao : acoes) {
+            if(acao.getSentido() == 3)
+              acao.setSentido(2);
+          }
+          break;
+        default:
+          break;
       }
       
       if (acoes.get(nAcoes-1).getAndou()) {
