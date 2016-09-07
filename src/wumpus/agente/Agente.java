@@ -51,6 +51,7 @@ public class Agente {
                 direcaoAtual = (direcaoAtual==-1?direcaoAtual=3:direcaoAtual);
             break;
         }
+        ambiente.girar(sentido);
     }
 
     public void voltaComeco() {
