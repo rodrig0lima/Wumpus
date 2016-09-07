@@ -41,6 +41,17 @@ public class Agente {
         visitadas.add(posicaoAtual);
     }
     
+    public void andar(){
+        ambiente.avancar();
+        nAcoes++;
+    }
+    
+    public void andarL(){
+        ambiente.avancar();
+        acoes.add(new Acao(3, true));
+        nAcoes++;
+    }
+    
     public void girar(int sentido){
         switch(sentido){
             case SENTIDO_DIREITA:
@@ -52,6 +63,19 @@ public class Agente {
             break;
         }
         ambiente.girar(sentido);
+    }
+    
+    public void girarEAndar(int sentido){
+        ambiente.girar(sentido);
+        ambiente.avancar();
+        acoes.add(new Acao(sentido, true));
+        nAcoes++;
+    }
+    
+    public void girarL(int sentido){
+        girar(sentido);
+        acoes.add(new Acao(sentido, false));
+        nAcoes++;
     }
 
     public void voltaComeco() {
@@ -68,19 +92,19 @@ public class Agente {
         switch (acoes.get(nAcoes - 1).getSentido()){
             case 0:
                 System.out.println("Voltando: Girei");
-                ambiente.girar(1);
+                girar(1);
                 acoes.remove(nAcoes - 1);
                 nAcoes--;
                 break;
             case 1:
                 System.out.println("Voltando: Girei");
-                ambiente.girar(0);
+                girar(0);
                 acoes.remove(nAcoes - 1);
                 nAcoes--;
                 break;
             case 3:
-                ambiente.girar(SENTIDO_ESQUERDA);
-                ambiente.girar(SENTIDO_ESQUERDA);
+                girar(SENTIDO_ESQUERDA);
+                girar(SENTIDO_ESQUERDA);
                 direcaoAtual = 3 - direcaoAtual;
                 for (Acao acao : acoes) {
                     if (acao.getSentido() == 3) {
@@ -122,6 +146,14 @@ public class Agente {
     public boolean matarWumpus() {
         return ambiente.atirar();
     }
+    
+    public boolean foiVisitada(int x,int y){
+        for(Casa visitada : visitadas){
+            if((visitada.getPosicaoX()==x)&&(visitada.getPosicaoY()==y))
+                return true;
+        }
+        return false;
+    }
 
     public boolean pegarOuro() {
         return ambiente.pegar();
@@ -134,8 +166,8 @@ public class Agente {
     public boolean irParaCasa(int x, int y) {
         return false;
     }
-
-    public void andar() {
+    
+    public void buscarOuro() {
         while (!ambiente.pegar()) {
             System.out.println("Estou aqui: " + posicaoAtual.getPosicaoX() + "," + posicaoAtual.getPosicaoY());
             System.out.println("Percepção: [fedor, brisa, brilho, choque, grito]");
@@ -161,72 +193,48 @@ public class Agente {
                 System.out.println("TUDO LIMPO!");
                 x[0] = posicaoAtual.getPosicaoX() + 1;
                 x[1] = posicaoAtual.getPosicaoY();
-                if (!visitadas.contains(new Casa(x, ambiente.getPercepcao()))) {
+                if (!foiVisitada(x[0], x[1])) {
                     System.out.println("Entrou na posição: " + x[0] + "," + x[1]);
                     direcaoAtual = DIRECAO_CIMA;
                     switch (direcaoAtual) {
                         case DIRECAO_CIMA:
-                            ambiente.avancar();
-                            acoes.add(new Acao(3, true));
-                            nAcoes += 1;
-                            break;
+                            andarL();
+                        break;
                         case DIRECAO_BAIXO:
-                            ambiente.girar(DIRECAO_ESQUERDA);
-                            acoes.add(new Acao(DIRECAO_ESQUERDA, false));
-                            ambiente.girar(DIRECAO_ESQUERDA);
-                            ambiente.avancar();
-                            acoes.add(new Acao(DIRECAO_ESQUERDA, true));
-                            nAcoes += 3;
+                            girarL(SENTIDO_ESQUERDA);
+                            girarEAndar(SENTIDO_ESQUERDA);
                             break;
                         case DIRECAO_ESQUERDA:
-                            ambiente.girar(SENTIDO_DIREITA);
-                            ambiente.avancar();
-                            acoes.add(new Acao(DIRECAO_DIREITA, true));
-                            nAcoes += 2;
+                            girarEAndar(SENTIDO_DIREITA);
                             break;
                         case DIRECAO_DIREITA:
-                            ambiente.girar(SENTIDO_ESQUERDA);
-                            ambiente.avancar();
-                            acoes.add(new Acao(DIRECAO_ESQUERDA, true));
-                            nAcoes += 2;
+                            girarL(SENTIDO_ESQUERDA);
+                            girarEAndar(SENTIDO_ESQUERDA);
                             break;
                     }
                     posicaoAtual = new Casa(x, ambiente.getPercepcao());
                     visitadas.add(posicaoAtual);
-
                 } else {
                     x[0] = posicaoAtual.getPosicaoX();
                     x[1] = posicaoAtual.getPosicaoY() + 1;
-                    if (!visitadas.contains(new Casa(x, ambiente.getPercepcao()))) {
+                    if (!foiVisitada(x[0], x[1])) {
                         posicaoAtual = new Casa(x, ambiente.getPercepcao());
                         visitadas.add(posicaoAtual);
                         System.out.println("Entrou na posição: " + x[0] + "," + x[1]);
                         direcaoAtual = DIRECAO_DIREITA;
                         switch (direcaoAtual) {
                             case DIRECAO_CIMA:
-                                ambiente.girar(SENTIDO_DIREITA);
-                                ambiente.avancar();
-                                acoes.add(new Acao(DIRECAO_DIREITA, true));
-                                nAcoes += 2;
+                                girarEAndar(SENTIDO_DIREITA);
                                 break;
                             case DIRECAO_BAIXO:
-                                ambiente.girar(SENTIDO_ESQUERDA);
-                                ambiente.avancar();
-                                acoes.add(new Acao(DIRECAO_ESQUERDA, true));
-                                nAcoes += 2;
+                                girarEAndar(SENTIDO_ESQUERDA);
                                 break;
                             case DIRECAO_ESQUERDA:
-                                ambiente.girar(SENTIDO_ESQUERDA);
-                                acoes.add(new Acao(DIRECAO_ESQUERDA, false));
-                                ambiente.girar(SENTIDO_ESQUERDA);
-                                ambiente.avancar();
-                                acoes.add(new Acao(DIRECAO_ESQUERDA, true));
-                                nAcoes += 3;
+                                girarL(SENTIDO_ESQUERDA);
+                                girarEAndar(SENTIDO_ESQUERDA);
                                 break;
                             case DIRECAO_DIREITA:
-                                ambiente.avancar();
-                                acoes.add(new Acao(3, true));
-                                nAcoes += 1;
+                                andarL();
                                 break;
                         }
                         posicaoAtual = new Casa(x, ambiente.getPercepcao());
@@ -236,36 +244,24 @@ public class Agente {
 
                         x[0] = posicaoAtual.getPosicaoX();
                         x[1] = posicaoAtual.getPosicaoY() - 1;
-                        if (!visitadas.contains(new Casa(x, ambiente.getPercepcao()))) {
+                        if (!foiVisitada(x[0], x[1])) {
                             posicaoAtual = new Casa(x, ambiente.getPercepcao());
                             visitadas.add(posicaoAtual);
                             System.out.println("Entrou na posição: " + x[0] + "," + x[1]);
                             direcaoAtual = DIRECAO_ESQUERDA;
                             switch (direcaoAtual) {
                                 case DIRECAO_CIMA:
-                                    ambiente.girar(SENTIDO_ESQUERDA);
-                                    ambiente.avancar();
-                                    acoes.add(new Acao(DIRECAO_ESQUERDA, true));
-                                    nAcoes += 2;
+                                    girarEAndar(SENTIDO_ESQUERDA);
                                     break;
                                 case DIRECAO_BAIXO:
-                                    ambiente.girar(SENTIDO_DIREITA);
-                                    ambiente.avancar();
-                                    acoes.add(new Acao(DIRECAO_DIREITA, true));
-                                    nAcoes += 2;
+                                    girarEAndar(SENTIDO_DIREITA);
                                     break;
                                 case DIRECAO_ESQUERDA:
-                                    ambiente.avancar();
-                                    acoes.add(new Acao(3, true));
-                                    nAcoes += 1;
+                                    andarL();
                                     break;
                                 case DIRECAO_DIREITA:
-                                    ambiente.girar(SENTIDO_ESQUERDA);
-                                    acoes.add(new Acao(DIRECAO_ESQUERDA, false));
-                                    ambiente.girar(SENTIDO_ESQUERDA);
-                                    ambiente.avancar();
-                                    acoes.add(new Acao(DIRECAO_ESQUERDA, true));
-                                    nAcoes += 3;
+                                    girarL(SENTIDO_ESQUERDA);
+                                    girarEAndar(SENTIDO_ESQUERDA);
                                     break;
                             }
                             posicaoAtual = new Casa(x, ambiente.getPercepcao());
@@ -274,48 +270,33 @@ public class Agente {
                         } else {
                             x[0] = posicaoAtual.getPosicaoX() - 1;
                             x[1] = posicaoAtual.getPosicaoY();
-                            if (!visitadas.contains(new Casa(x, ambiente.getPercepcao()))) {
+                            if (!foiVisitada(x[0], x[1])) {
                                 posicaoAtual = new Casa(x, ambiente.getPercepcao());
                                 visitadas.add(posicaoAtual);
                                 System.out.println("Entrou na posição: " + x[0] + "," + x[1]);
                                 direcaoAtual = DIRECAO_BAIXO;
                                 switch (direcaoAtual) {
                                     case DIRECAO_CIMA:
-                                        ambiente.avancar();
-                                        acoes.add(new Acao(3, true));
-                                        nAcoes += 1;
+                                        andarL();
                                         break;
                                     case DIRECAO_BAIXO:
-                                        ambiente.girar(SENTIDO_DIREITA);
-                                        acoes.add(new Acao(DIRECAO_DIREITA, false));
-                                        ambiente.girar(SENTIDO_DIREITA);
-                                        ambiente.avancar();
-                                        acoes.add(new Acao(DIRECAO_DIREITA, true));
-                                        nAcoes += 3;
+                                        girarL(SENTIDO_DIREITA);
+                                        girarEAndar(SENTIDO_DIREITA);
                                         break;
                                     case DIRECAO_ESQUERDA:
-                                        ambiente.girar(SENTIDO_DIREITA);
-                                        ambiente.avancar();
-                                        acoes.add(new Acao(DIRECAO_DIREITA, true));
-                                        nAcoes += 2;
+                                        girarEAndar(SENTIDO_DIREITA);
                                         break;
                                     case DIRECAO_DIREITA:
-                                        ambiente.girar(SENTIDO_ESQUERDA);
-                                        ambiente.avancar();
-                                        acoes.add(new Acao(DIRECAO_ESQUERDA, true));
-                                        nAcoes += 2;
+                                        girarEAndar(SENTIDO_DIREITA);
                                         break;
                                 }
                                 posicaoAtual = new Casa(x, ambiente.getPercepcao());
                                 visitadas.add(posicaoAtual);
-
                             }
-
                         }
                     }
                 }
             }
-
         }
     }
 }
