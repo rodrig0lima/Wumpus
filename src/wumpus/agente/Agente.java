@@ -85,6 +85,8 @@ public class Agente {
          ambiente.avancar();
          acoes.remove(nAcoes-1);
          nAcoes--;
+         ambiente.girar(SENTIDO_ESQUERDA);
+         ambiente.girar(SENTIDO_ESQUERDA);
          switch(direcaoAtual){
            case DIRECAO_CIMA:
              posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoX()+1);
