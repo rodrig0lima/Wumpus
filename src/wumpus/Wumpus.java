@@ -31,7 +31,7 @@ public class Wumpus extends Application {
             public void handle(ActionEvent event) {
                 Ambiente ambiente = new Ambiente(4,4,3,1);
                 Agente agente = new Agente(ambiente);
-                  agente.andar();
+                  agente.buscarOuro();
 //                amb.getPercepcao();
 //                amb.avancar();
 //                amb.getPercepcao();
