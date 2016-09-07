@@ -50,6 +50,11 @@ public class Agente {
           voltar();
         }
     }
+    public void reset(){
+        ambiente.girar(SENTIDO_ESQUERDA);
+        ambiente.girar(SENTIDO_ESQUERDA);
+        direcaoAtual = 3 - direcaoAtual;
+    }
     public void voltar(){
       for (Acao acao : acoes) {
         System.out.println(acao.getSentido()+" "+acao.getAndou());
@@ -71,6 +76,7 @@ public class Agente {
         case 3:
           ambiente.girar(SENTIDO_ESQUERDA);
           ambiente.girar(SENTIDO_ESQUERDA);
+         
           direcaoAtual = 3 - direcaoAtual;
           for (Acao acao : acoes) {
             if(acao.getSentido() == 3)
@@ -85,10 +91,13 @@ public class Agente {
          ambiente.avancar();
          acoes.remove(nAcoes-1);
          nAcoes--;
+         ambiente.girar(SENTIDO_ESQUERDA);
+         ambiente.girar(SENTIDO_ESQUERDA);
          switch(direcaoAtual){
            case DIRECAO_CIMA:
              posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoX()+1);
              System.out.println("Eu estou aq: "+ posicaoAtual.getPosicaoX()+","+posicaoAtual.getPosicaoY());
+             
              break;
            case DIRECAO_BAIXO:
              posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoX()-1);
