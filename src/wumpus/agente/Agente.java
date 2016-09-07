@@ -40,6 +40,18 @@ public class Agente {
         visitadas = new ArrayList<>();
         visitadas.add(posicaoAtual);
     }
+    
+    public void girar(int sentido){
+        switch(sentido){
+            case SENTIDO_DIREITA:
+                direcaoAtual = (direcaoAtual+1)%4;
+            break;
+            case SENTIDO_ESQUERDA:
+                direcaoAtual = (direcaoAtual-1);
+                direcaoAtual = (direcaoAtual==-1?direcaoAtual=3:direcaoAtual);
+            break;
+        }
+    }
 
     public void voltaComeco() {
         while (posicaoAtual.getPosicaoX() != 1 && posicaoAtual.getPosicaoY() != 1) {
