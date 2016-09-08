@@ -43,11 +43,12 @@ public class Agente {
     
     public void andar(){
         ambiente.avancar();
-        nAcoes++;
     }
     
     public void andarL(){
-        ambiente.avancar();
+        if(!ambiente.avancar()){
+            System.out.println("choque");
+        }
         acoes.add(new Acao(3, true));
         nAcoes++;
     }
@@ -67,7 +68,9 @@ public class Agente {
     
     public void girarEAndar(int sentido){
         ambiente.girar(sentido);
-        ambiente.avancar();
+        if(!ambiente.avancar()){
+            System.out.println("choque");
+        }
         acoes.add(new Acao(sentido, true));
         nAcoes++;
     }
@@ -120,6 +123,7 @@ public class Agente {
             ambiente.avancar();
             acoes.remove(nAcoes - 1);
             nAcoes--;
+            posicaoAtual.setSensacoes(ambiente.getPercepcao());
             switch (direcaoAtual) {
                 case DIRECAO_CIMA:
                     posicaoAtual.setPosicaoX(posicaoAtual.getPosicaoX() + 1);
@@ -178,10 +182,7 @@ public class Agente {
             System.out.println(p);
             if (posicaoAtual.isBrisa()) {
                 System.out.println("TEM BRISA!");
-                voltar();
-            } else if (posicaoAtual.isChoque()) {
-                System.out.println("TEM CHOQUE!");
-                voltar();
+                voltar();            
             } else if (posicaoAtual.isFedor()) {
                 System.out.println("TEM FEDOR!");
                 voltar();
