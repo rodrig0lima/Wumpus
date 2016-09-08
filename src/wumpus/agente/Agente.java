@@ -89,7 +89,7 @@ public class Agente {
             System.out.println(acao.getSentido() + " " + acao.getAndou());
         }
         System.out.println("VOLTEI!!");
-        switch (acoes.get(nAcoes - 1).getSentido()){
+        switch (acoes.get(nAcoes - 1).getSentido()) {
             case 0:
                 System.out.println("Voltando: Girei");
                 girar(1);
