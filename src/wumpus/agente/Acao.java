@@ -24,6 +24,15 @@ public class Acao {
   public boolean getAndou() {
     return andou;
   }
+
+  public void setSentido(int sentido) {
+    this.sentido = sentido;
+  }
+
+  public void setAndou(boolean andou) {
+    this.andou = andou;
+  }
+  
   
   
 }
