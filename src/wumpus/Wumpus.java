@@ -29,7 +29,7 @@ public class Wumpus extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                Ambiente ambiente = new Ambiente(4,4,3,1);
+                Ambiente ambiente = new Ambiente(8,8,5,1);
                 Agente agente = new Agente(ambiente);
                   agente.buscarOuro();
 //                amb.getPercepcao();

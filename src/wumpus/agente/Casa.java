@@ -17,7 +17,13 @@ public class Casa {
     private boolean brilho;
     private boolean choque;
     private boolean grito;
+    //Visitada
     private boolean visitada;
+    //Estados diferentes
+    private boolean brisaHorizontal;
+    private boolean brisaVertical;
+    private boolean fedorHorizontal;
+    private boolean fedorVertical;
     // Estados
     private int estadoWumpus;
     private int estadoBuraco;
@@ -33,6 +39,27 @@ public class Casa {
         this.estadoWumpus = DESCONHECIDO;
         this.estadoBuraco = DESCONHECIDO;
         this.visitada = false;
+        this.brisaHorizontal = false;
+        this.brisaVertical = false;
+        this.fedorHorizontal = false;
+        this.fedorVertical = false;
+    }
+    
+    public Casa(int posicoes[]){
+        this.posicaoX = posicoes[0];
+        this.posicaoY = posicoes[1];
+        this.fedor = false;
+        this.brisa = false;
+        this.brilho = false;
+        this.choque = false;
+        this.grito = false;
+        this.estadoWumpus = DESCONHECIDO;
+        this.estadoBuraco = DESCONHECIDO;
+        this.visitada = false;
+        this.brisaHorizontal = false;
+        this.brisaVertical = false;
+        this.fedorHorizontal = false;
+        this.fedorVertical = false;
     }
 
     public void setPosicaoX(int posicaoX) {
@@ -83,7 +110,7 @@ public class Casa {
         return estadoWumpus==EXISTE;
     }
     
-    public boolean isOk(){
+    public boolean taOk(){
         return estadoWumpus==NAO_EXISTE&&estadoBuraco==NAO_EXISTE;
     }
     
@@ -103,9 +130,45 @@ public class Casa {
         this.estadoBuraco = estado;
     }
     
+    public void setBrisaHorizontal(boolean brisaHorizontal){
+        this.brisaHorizontal = brisaHorizontal;
+    }
+    
+    public void setBrisaVertical(boolean brisaVertical){
+        this.brisaVertical = brisaVertical;
+    }
+    
+    public void setFedorHorizontal(boolean fedorHorizontal){
+        this.fedorHorizontal = fedorHorizontal;
+    }
+    
+    public void setFedorVertical(boolean fedorVertical){
+        this.fedorVertical = fedorVertical;
+    }
+    
+    public boolean isBrisaHorizontal(){
+        return brisaHorizontal;
+    }
+    
+    public boolean isBrisaVertical(){
+        return brisaVertical;
+    }
+    
+    public boolean isFedorHorizontal(){
+        return fedorHorizontal;
+    }
+    
+    public boolean isFedorVertical(){
+        return fedorVertical;
+    }
+    
     public void setOk(){
         this.estadoBuraco = NAO_EXISTE;
         this.estadoWumpus = NAO_EXISTE;
+    }
+    
+    public boolean semSensacoes(){
+        return !brisa&&!choque&&!fedor;
     }
     
     public void setSensacoes(boolean sensacoes[]){
@@ -121,7 +184,14 @@ public class Casa {
                   ", " + grito + "]";
         System.out.println(p);
     }
+    
     public void setVisitada(){
         this.visitada = true;
+    }
+    
+    @Override
+    public String toString(){
+        return  "Posição atual: ("+posicaoX+","+posicaoY+")"
+                + "\nSente: [" + fedor + ", " + brisa + ", " + brilho + ", " + choque +", " + grito + "]";
     }
 }
